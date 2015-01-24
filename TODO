@@ -1,0 +1,20 @@
+Version 1.0.0 should include:
+- Email notifications every 24 hours after latest commit
+- Properly working database with service username, email, and account name
+- I don't know.
+
+The following is mostly a bunch of random thoughts that are public. If anyone
+wants to contribute or help, possibly creating an open issue based on one of
+these or sending a PR regarding one of these, or even just saying one of these
+is a good or bad idea would be great.
+
+- Alternative notification methods (texts, calls, push notifications, etc.)
+
+- Allowing setting arbitrary amount of time after commit to be notified
+
+- Defining own notification message(s)
+
+- Having different messages based on time since last commit (i.e. message A
+  after 24 hours, message B after 72 hours, etc.)
+
+- Supporting BitBucket, GitLab, Heroku (?), self-served git servers
