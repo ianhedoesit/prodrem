@@ -32,5 +32,5 @@ DROP TABLE users;
 CREATE TABLE IF NOT EXISTS users (
   id serial PRIMARY KEY,
   username VARCHAR (40) NOT NULL, -- Prodrem username
-  email VARCHAR (60) NOT NULL,
+  email VARCHAR (40) NOT NULL,
   accountname VARCHAR (40) NOT NULL); -- GitHub (or other) username

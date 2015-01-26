@@ -1,7 +1,12 @@
 Version 1.0.0 should include:
 - Email notifications every 24 hours after latest commit
 - Properly working database with service username, email, and account name
-- I don't know.
+- Only API. No front-end work needed for the front-end, such as the sitee. I
+  expect a number of changes to happen after v1 - changes dictated somewhat by
+  using the product and making the site - and I'd like to have a clear
+  separation between the two milestones. v1 should still work just fine even
+  after v2 is released as a non-graphical, simplistic approach to using the
+  service.
 
 The following is mostly a bunch of random thoughts that are public. If anyone
 wants to contribute or help, possibly creating an open issue based on one of
@@ -18,3 +23,9 @@ is a good or bad idea would be great.
   after 24 hours, message B after 72 hours, etc.)
 
 - Supporting BitBucket, GitLab, Heroku (?), self-served git servers
+
+How should authentication be dealt with? How should one confirm it's not only
+their email, but they're also getting notifications for the account they wish
+to monitor.
+
+- Emails should have a "Not expecting this email?" sort of thing.

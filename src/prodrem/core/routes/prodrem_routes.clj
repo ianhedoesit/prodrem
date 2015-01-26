@@ -13,9 +13,19 @@
     (read-user user)
     (edit-user user)))
 
-(defn post-route
+(defn start-route
+  "The start route adds a user to be monitored.
+  `POST /start/:u` will email the user after 24 hours from this POST."
   [request]
-  "")
+  (let [username (get-in request [:params :username])
+        email (get-in request [:params :email])
+        accountname (get-in request [:params :accountname])]
+    (prn "user: " username "; email: " email "; (GH) account: " accountname)
+    (query/insert-user<! {:username username :email email
+                            :accountname accountname})
+    (comment get most recent commit here)
+    (comment set new reminder 24 hours from now)
+    (str "user: " username "; email: " email "; (GH) account: " accountname \newline)))
 
 (defn get-route
   [request]
@@ -31,7 +41,8 @@
 
 (defroutes prodrem-routes
   (GET "/" [] "hello")
-  (GET "/user/:u" [u] (str "user = " u))
-  (GET "/edit/:contact-id" [] get-route)
-  (POST "/edit/:contact-id" [] update-route)
-  (POST "/delete/:contact-id" [] delete-route)) 
+  (POST "/start" [] start-route)
+  (GET "/edit/:user-id" [] get-route)
+  (POST "/edit/:user-id" [] update-route)
+  (POST "/delete/:user-id" [] delete-route))
+
