@@ -29,3 +29,8 @@ their email, but they're also getting notifications for the account they wish
 to monitor.
 
 - Emails should have a "Not expecting this email?" sort of thing.
+
+Optional "warning" emails/alerts? Thinking about Block Time, maybe Block Time
+could sort tasks based on how much time a user has based on a task. There's
+really no need for a warning though. Just change the alert to be a warning.
+This ties into a thought above.

@@ -1,10 +1,10 @@
 -- name: all-users
 -- Selects all users
-SELECT id,
-       username,
-       email,
-       accountname
-      FROM users;
+SELECT id
+       ,username
+       ,email
+       ,accountname
+FROM users;
 
 -- name: insert-user<!
 -- Queries a single user
