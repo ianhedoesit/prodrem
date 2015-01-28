@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ianhedoesit/prodrem.svg)](https://travis-ci.org/ianhedoesit/prodrem)
+
 # prodrem
 
 ProdRem (working name) is a productivity reminder based on git commits.
