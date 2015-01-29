@@ -7,9 +7,30 @@
                                                        edit-user
                                                        reminder-layout]]
             [prodrem.core.models.query-defs :as query]
-            [overtone.at-at :refer :all]))
+            [overtone.at-at :refer :all]
+           ;; [cheshire.core :refer [parse-string decode]]
+            [clj-http.lite.client :as client]
+            [hiccup.util :refer [url-encode]]
+            [environ.core :refer [env]]))
 
 (def pr-pool (mk-pool))
+
+(def hdrs {"User-Agent" "ProdRem (gh/ianhedoesit/prodrem)"
+           "Content-Type" "application/x-www-form-urlencoded"})
+(def endpoint "https://rest.nexmo.com/sms/json")
+(def api {:key (env :api-key)
+          :secret (env :api-secret)
+          :number (env :api-number)})
+
+(defn send-to
+  [num mess]
+  (def uri
+    (str endpoint \? "api_key=" (env :api-key) \&
+         "api_secret=" (env :api-secret) \&
+         "from=" (env :api-number) \&
+         "to=" num \&
+         "text=" (url-encode mess)))
+  (client/get uri))
 
 (defn display-user
   [user user-id]
@@ -24,7 +45,8 @@
   (comment for now this will just update the root index page saying
            "at (time), it has been 24 hours since `username` has made a git
            commit")
-  (common-layout (reminder-layout username)))
+  (send-to (env :to-number)
+           (str "It's been 24 hours since your last GitHub commit! Get committing! :)")))
 
 (defn start-route
   "The start route adds a user to be monitored.
@@ -37,8 +59,16 @@
                             :accountname accountname})
     (comment get most recent commit here)
     (comment set new reminder 24 hours from now)
-    (every (* 1 60 1000) #(send-reminder username) pr-pool)
-    (send-reminder username)))
+    (every (* 5 60 1000) #(send-reminder username) pr-pool)
+    ;;(send-reminder username)
+    ))
+
+(defn test-route
+  "FOR TESTING PURPOSES ONLY DO NOT USE"
+  [request]
+  (let [number (get-in request [:params :number])
+        message (get-in request [:params :message])]
+     (at (+ (* 2 60 1000) (now))  #(send-to number message) pr-pool)))
 
 (defn get-route
   [request]
@@ -73,5 +103,6 @@
   (GET "/edit/:user-id" [] get-route)
   (POST "/edit/:user-id" [] update-route)
   (POST "/delete/:user-id" [] delete-route)
-  (GET "/info" [] info-route))
+  (GET "/info" [] info-route)
+  (POST "/test" [] test-route))
 

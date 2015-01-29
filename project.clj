@@ -1,4 +1,4 @@
-(defproject prodrem "0.1.0-SNAPSHOT"
+(defproject prodrem "0.2.0-SNAPSHOT"
   :description "Productivity reminder based on git commits."
   :url "http://ianhedoesit.com/prodrem"
   :min-lein-version "2.0.0"
@@ -16,7 +16,9 @@
                  [yesql "0.5.0-rc1"]
                  [environ "1.0.0"]
                  [postgresql/postgresql "9.3-1102.jdbc41"]
-                 [org.clojure/java.jdbc "0.3.6"]]
+                 [org.clojure/java.jdbc "0.3.6"]
+                 [clj-http-lite "0.2.1"]
+                 [cheshire "5.4.0"]]
 
   :plugins [[lein-ring "0.8.13"]
             [lein-environ "1.0.0"]]
